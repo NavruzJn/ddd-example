@@ -1,0 +1,14 @@
+{
+  "name": "@protos/interfaces",
+  "version": "0.0.0",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "scripts": {
+    "compile": "node_modules/.bin/rxjs-grpc -o src/index.ts ../common/*.proto ../account/*.proto ../transaction/*.proto"
+  },
+  "dependencies": {
+    "grpc": "^1.24.10",
+    "rxjs": "^7.2.0",
+    "rxjs-grpc": "^0.2.6"
+  }
+}

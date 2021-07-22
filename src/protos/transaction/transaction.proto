@@ -1,0 +1,115 @@
+syntax = "proto3";
+
+import "../../common/common.proto";
+
+package transaction;
+
+service TransactionService {
+  rpc GetTransactions(GetTransactionsRequest) returns (GetTransactionsResponse) {}
+  rpc GetTransaction(GetTransactionRequest) returns (GetTransactionResponse) {}
+  rpc CreateTransaction(CreateTransactionRequest) returns(CreateTransactionResponse) {}
+  rpc UpdateTransaction(UpdateTransactionRequest) returns(UpdateTransactionResponse) {}
+  rpc ChangeTransactionStatus(ChangeTransactionRequest) returns(ChangeTransactionResponse) {}
+}
+
+enum Status {
+  New = 0;
+  Succeeded = 1;
+  Rejected = 2;
+}
+
+message Transaction {
+  string id = 1;
+  string senderId = 2;
+  string beneficiaryId = 3;
+  string description = 4;
+  float amount = 5;
+  string currency = 6;
+  string updatedAt = 7;
+  string createAt = 8;
+  Status status = 9;
+}
+
+message TransactionsOrder {
+  string by = 1;
+  string direction = 2;
+}
+
+message GetTransactionsRequest {
+  common.Pager pager = 1;
+  TransactionsOrder order = 2;
+}
+
+message GetTransactionsResponse {
+  repeated Transaction result = 1;
+}
+
+message GetTransactionRequest {
+  string id = 1;
+}
+
+message GetTransactionErrors {
+  string id = 1;
+}
+
+message GetTransactionResponse{
+  GetTransactionErrors errors = 1;
+  Transaction result = 2;
+}
+
+message CreateTransactionRequest {
+  string senderId = 1;
+  string beneficiaryId = 2;
+  string description = 3;
+  float amount = 4;
+  string currency = 5;
+}
+
+message CreateTransactionErrors {
+  string senderId = 1;
+  string beneficiaryId = 2;
+  string description = 3;
+  float amount = 4;
+  string currency = 5;
+}
+
+message CreateTransactionResponse {
+  CreateTransactionErrors errors = 1;
+  Transaction result = 2;
+}
+
+message UpdateTransactionRequest {
+  string id = 1;
+  string beneficiaryId = 2;
+  string description = 3;
+  float amount = 4;
+  string currency = 5;
+}
+
+message UpdateTransactionErrors {
+  string id = 1;
+  string beneficiaryId = 2;
+  string description = 3;
+  float amount = 4;
+  string currency = 5;
+}
+
+message UpdateTransactionResponse {
+  UpdateTransactionErrors errors = 1;
+  Transaction result = 2;
+}
+
+message ChangeTransactionRequest {
+  string id = 1;
+  Status status = 2;
+}
+
+message ChangeTransactionErrors {
+  string id = 1;
+  Status status = 2;
+}
+
+message ChangeTransactionResponse {
+  ChangeTransactionErrors errors = 1;
+  Transaction result = 2;
+}

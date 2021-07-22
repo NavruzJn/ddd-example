@@ -1,0 +1,7 @@
+{
+  "extends": "@atlantis-lab/tsconfig/tsconfig.base.json",
+  "include": ["src/**/**/*"],
+  "compilerOptions": {
+    "skipLibCheck": true
+  }
+}

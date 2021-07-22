@@ -1,0 +1,99 @@
+version: '3.7'
+
+services:
+  yarn:
+    image: node:14
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+      - modules:/workspace/node_modules
+      - yarncache:/workspace/.yarn-cache
+    environment:
+      - YARN_CACHE_FOLDER=/workspace/.yarn-cache
+    entrypoint: yarn
+
+  rabbitmq:
+    build:
+      context: ./config/rabbitmq/
+      dockerfile: ./Dockerfile
+    ports:
+      - 4369:4369
+      - 5671:5671
+      - 5672:5672
+      - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=local
+      - RABBITMQ_DEFAULT_PASS=password
+    networks:
+      - default
+
+  db:
+    image: bitnami/postgresql
+    environment:
+      - POSTGRESQL_PASSWORD=password
+      - POSTGRESQL_DATABASE=db
+    ports:
+      - '5432:5432'
+    networks:
+      - default
+
+  account:
+    image: node:14
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+      - modules:/workspace/node_modules
+    entrypoint: yarn account-service:dev
+    depends_on:
+      - rabbitmq
+      - db
+    networks:
+      - default
+
+  currency:
+    image: node:14
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+      - modules:/workspace/node_modules
+    entrypoint: yarn currency-service:dev
+    depends_on:
+      - rabbitmq
+      - db
+    networks:
+      - default
+
+  transaction:
+    image: node:14
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+      - modules:/workspace/node_modules
+    entrypoint: yarn transaction-service:dev
+    depends_on:
+      - rabbitmq
+      - db
+    networks:
+      - default
+
+  traefik:
+    image: traefik:2.4
+    command: --api --docker
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /dev/null:/traefik.toml
+    networks:
+      default:
+      internal:
+
+volumes:
+  modules:
+  yarncache:
+
+networks:
+  default:
+  internal:
+

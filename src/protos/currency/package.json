@@ -1,0 +1,12 @@
+{
+  "name": "@protos/currency",
+  "version": "0.0.0",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "dependencies": {
+    "@grpc/proto-loader": "^0.6.4",
+    "@nestjs/microservices": "^8.0.4",
+    "@protos/common": "0.0.0",
+    "grpc": "^1.24.10"
+  }
+}

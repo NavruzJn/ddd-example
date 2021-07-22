@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+import "../../common/common.proto";
+
+package currency;
+
+service CurrencyService {
+  rpc GetCurrencies(common.empty) returns (GetCurrencies) {}
+  rpc GetCurrencyRate(GetCurrencyRateRequest) returns (GetCurrencyRateResponse) {}
+}
+
+message Currency {
+  string code = 1;
+  string name = 2;
+}
+
+message CurrencyRate {
+  string from = 1;
+  string to = 2;
+  float rate = 3;
+}
+
+message GetCurrencyRateRequest {
+  string from = 1;
+  string to = 2;
+}
+
+message GetCurrencyRateErrors {
+  string from = 1;
+  string to = 2;
+}
+
+message GetCurrencyRateResponse {
+  GetCurrencyRateErrors errors = 1;
+  CurrencyRate result = 2;
+}
+
+message GetCurrencies {
+  repeated Currency result = 1;
+}

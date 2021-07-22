@@ -1,0 +1,151 @@
+syntax = "proto3";
+
+import "../../common/common.proto";
+
+package account;
+
+service AccountService {
+  rpc GetAccount(GetAccountRequest) returns (GetAccountResponse) {}
+  rpc GetAccounts(common.Empty) returns (GetAccountsResponse) {}
+  rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse) {}
+  rpc UpdateAccount(UpdateAccountRequest) returns(UpdateAccountResponse) {}
+  rpc ConfirmBirthday(ConfirmBirthdayRequest) returns (ConfirmBirthdayResponse) {}
+  rpc ConfirmEmail(ConfirmEmailRequest) returns (ConfirmBirthdayResponse) {}
+  rpc ChangeStatus(ChangeStatusRequest) returns (ChangeStatusResponse) {}
+}
+
+enum Status {
+  New = 0;
+  Confirmed = 1;
+  Banned = 2;
+  Disabled = 3;
+}
+
+message Birthday {
+  string date = 1;
+  bool confirmed = 2;
+}
+
+message Email {
+  string address = 1;
+  bool confirmed = 2;
+}
+
+message Account {
+  string id = 1;
+  string firstname = 2;
+  string lastname = 3;
+  string password = 4;
+  string lastSession = 5;
+  Email email = 7;
+  Birthday birthday = 9;
+}
+
+message CreateAccountRequest {
+  string firstname = 1;
+  string password = 2;
+  string birthday = 3;
+  string email = 4;
+  string lastname = 5;
+  string accountNumber = 6;
+  string currency = 7;
+}
+
+message CreateAccountErrors {
+  string firstname = 1;
+  string password = 2;
+  string birthday = 3;
+  string email = 4;
+  string lastname = 5;
+  string accountNumber = 6;
+  string currency = 7;
+}
+
+message CreateAccountResponse {
+  CreateAccountErrors errors = 1;
+  Account result = 2;
+}
+
+message UpdateAccountRequest {
+  string id = 1;
+  string firstname = 2;
+  string birthday = 3;
+  string email = 4;
+  string lastname = 5;
+}
+
+message UpdateAccountErrors {
+  string id = 1;
+  string firstname = 2;
+  string lastname = 3;
+  string birthday = 4;
+  string email = 5;
+}
+
+message UpdateAccountResponse {
+  UpdateAccountErrors errors = 1;
+  Account result = 2;
+}
+
+message GetAccountRequest {
+  string id = 1;
+}
+
+message GetAccountErrors {
+  string id = 1;
+}
+
+message GetAccountResponse {
+  GetAccountErrors errors = 1;
+  Account result = 2;
+}
+
+message GetAccountsErrors {
+  string message = 1;
+}
+
+message GetAccountsResponse {
+  GetAccountsErrors errors = 1;
+  repeated Account result = 2;
+}
+
+message ConfirmBirthdayRequest {
+  string id = 1;
+}
+
+message ConfirmBirthdayErrors {
+  string id = 1;
+}
+
+message ConfirmBirthdayResponse {
+  ConfirmBirthdayErrors errors = 1;
+  Account result = 2;
+}
+
+message ConfirmEmailRequest {
+  string id = 1;
+}
+
+message ConfirmEmailErrors {
+  string id = 1;
+}
+
+message ConfirmEmailResponse {
+  ConfirmEmailErrors errors = 1;
+  Account result = 2;
+}
+
+message ChangeStatusRequest {
+  string id = 1;
+  Status status = 2;
+}
+
+message ChangeStatusErrors {
+  string id = 1;
+  Status status = 2;
+}
+
+message ChangeStatusResponse {
+  ChangeStatusErrors errors = 1;
+  Account result = 2;
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@logger/interceptor",
+  "version": "0.0.0",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "dependencies": {
+    "@nestjs/common": "6.11.11",
+    "@sentry/minimal": "^6.0.3",
+    "@sentry/node": "^6.0.3",
+    "rxjs": "6.5.3"
+  }
+}
