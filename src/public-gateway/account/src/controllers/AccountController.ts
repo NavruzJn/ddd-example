@@ -24,12 +24,12 @@ export class AccountController implements OnModuleInit {
   }
 
   @Put('/:id')
-  updateTicket(@Param('id') id: number, @Req() req: any, @Body() body: UpdateCommand) {
+  updateAccount(@Param('id') id: number, @Req() req: any, @Body() body: UpdateCommand) {
     return this.accountService.updateAccount(body)
   }
 
   @Put('/:id/status')
-  deleteTicket(@Param('id') body: ChangeStatusCommand) {
+  changeStatus(@Param('id') body: ChangeStatusCommand) {
     return this.accountService.changeStatus(body)
   }
 }
