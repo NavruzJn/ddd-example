@@ -16,7 +16,7 @@ async function bootstrap() {
   app.enableCors()
   // app.useLogger();
   const configService = app.get<ConfigService>(ConfigService)
-  await app.listen(configService.get<number>('app.port') || 30000)
+  await app.listen(configService.get<number>('app.port') || 3000)
 }
 
 bootstrap()

@@ -27,7 +27,7 @@ export class TransactionApplicationService implements OnModuleInit {
       'AccountService',
     )
 
-    this.currencyService = this.accountClient.getService<currencyInterface.CurrencyService>(
+    this.currencyService = this.currencyClient.getService<currencyInterface.CurrencyService>(
       'CurrencyService',
     )
   }

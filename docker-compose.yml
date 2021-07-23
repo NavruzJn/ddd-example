@@ -85,6 +85,8 @@ services:
       - ./:/workspace
       - modules:/workspace/node_modules
     entrypoint: yarn public-gateway:dev
+    ports:
+      - 3000:3000
     depends_on:
       - rabbitmq
       - db
