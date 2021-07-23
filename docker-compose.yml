@@ -78,6 +78,21 @@ services:
     networks:
       - default
 
+  public-gateway:
+    image: node:14
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+      - modules:/workspace/node_modules
+    entrypoint: yarn public-gateway:dev
+    depends_on:
+      - rabbitmq
+      - db
+      - account
+      - currency
+    networks:
+      - default
+
   traefik:
     image: traefik:2.4
     command: --api --docker

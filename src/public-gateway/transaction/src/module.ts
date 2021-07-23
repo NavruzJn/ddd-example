@@ -5,4 +5,4 @@ import { TransactionController, TransactionQueriesController } from './controlle
 @Module({
   controllers: [TransactionController, TransactionQueriesController],
 })
-export class AccountModule {}
+export class TransactionModule {}
