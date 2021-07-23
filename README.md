@@ -16,12 +16,24 @@ Also, there can be added extra participants like bank, activity log, etc.
 
 1. ```docker-compose run yarn``` - to install all dependencies
 2. ```docker-compose up -d``` - to start all containers (pg, rabbitmq, account service, transaction service, currency service)
+3. API is available via localhost:3000
 
-### Tools
+### Documentation
 
+1. ```cd swagger/```
+2. ```docker-compose up -d```
+3. open in browser localhost:8080
+
+### Techs
+
+- rabbitmq - event bus
+- grpc - transport between services
+- http - public gateway
+- swagger - documentation
+- nestjs - framework to build scalable Node.js web applications
 
 ### TODOs
 
-1. add logic to perform transactions between accounts
-2. add e2e and unit tests
-3. REST Api documentation
+1. handle errors in gateway received from services
+2. add tests
+3. add jsdoc comments

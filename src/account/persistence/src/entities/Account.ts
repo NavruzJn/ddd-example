@@ -46,6 +46,7 @@ export class Account {
     type => Requisite,
     requisite => requisite.account,
     {
+      eager: true,
       cascade: true,
     },
   )

@@ -108,13 +108,9 @@ message GetAccountResponse {
   Account result = 2;
 }
 
-message GetAccountsErrors {
-  string message = 1;
-}
-
 message GetAccountsResponse {
-  GetAccountsErrors errors = 1;
-  repeated Account result = 2;
+  repeated Account rows = 1;
+  common.PageInfo pageInfo = 2;
 }
 
 message ConfirmBirthdayRequest {

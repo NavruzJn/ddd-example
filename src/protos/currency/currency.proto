@@ -36,5 +36,6 @@ message GetCurrencyRateResponse {
 }
 
 message GetCurrencies {
-  repeated Currency result = 1;
+  repeated Currency rows = 1;
+  common.PageInfo pageInfo = 2;
 }

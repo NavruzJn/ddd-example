@@ -10,11 +10,7 @@ export class AccountQueriesController {
 
   @GrpcMethod('AccountService', 'GetAccounts')
   async getAccounts({ pager, filters }) {
-    const result = await this.accountQueriesService.getAccounts({ pager })
-
-    return {
-      result,
-    }
+    return this.accountQueriesService.getAccounts({ pager })
   }
 
   @GrpcMethod('AccountService', 'GetAccount')

@@ -47,7 +47,8 @@ message GetTransactionsRequest {
 }
 
 message GetTransactionsResponse {
-  repeated Transaction result = 1;
+  repeated Transaction rows = 1;
+  common.PageInfo pageInfo = 2;
 }
 
 message GetTransactionRequest {

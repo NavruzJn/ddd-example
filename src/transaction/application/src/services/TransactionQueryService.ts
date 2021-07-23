@@ -6,7 +6,9 @@ export class TransactionQueryService {
   constructor(private readonly transactionEntityRepository: TransactionEntityRepository) {}
 
   async getTransaction(id) {
-    return this.transactionEntityRepository.getTransactionById(id)
+    const result = await this.transactionEntityRepository.getTransactionById(id)
+
+    return { result }
   }
 
   async getTransactions({ pager, filters }) {

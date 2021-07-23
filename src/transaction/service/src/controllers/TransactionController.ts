@@ -16,22 +16,19 @@ export class TransactionController {
 
   @GrpcMethod('TransactionService', 'CreateTransaction')
   @UsePipes(new ValidationPipe({ transform: true }))
-  async createAccount(command: CreateCommand) {
-    const result = await this.transactionApplicationService.create(command)
-    return { result }
+  createAccount(command: CreateCommand) {
+    return this.transactionApplicationService.create(command)
   }
 
   @GrpcMethod('TransactionService', 'UpdateTransaction')
   @UsePipes(new ValidationPipe({ transform: true }))
-  async updateAccount(command: UpdateCommand) {
-    const result = await this.transactionApplicationService.update(command)
-    return { result }
+  updateAccount(command: UpdateCommand) {
+    return this.transactionApplicationService.update(command)
   }
 
   @GrpcMethod('TransactionService', 'ChangeTransactionStatus')
   @UsePipes(new ValidationPipe({ transform: true }))
-  async registerAccount(command: ChangeStatusCommand) {
-    const result = await this.transactionApplicationService.changeStatus(command)
-    return { result }
+  registerAccount(command: ChangeStatusCommand) {
+    return this.transactionApplicationService.changeStatus(command)
   }
 }

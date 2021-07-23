@@ -4,7 +4,7 @@ import { Controller, Get, Param }                from '@nestjs/common'
 import { clientOptions as accountClientOptions } from '@protos/account'
 import { account as accountInterface }           from '@protos/interfaces'
 
-@Controller({ path: '/account' })
+@Controller({ path: '/accounts' })
 export class AccountQueriesController {
   @Client(accountClientOptions)
   private readonly accountClient: ClientGrpc

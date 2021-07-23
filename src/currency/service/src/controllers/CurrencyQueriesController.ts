@@ -10,9 +10,7 @@ export class CurrencyQueriesController {
 
   @GrpcMethod('CurrencyService', 'GetCurrencies')
   async getCurrencies() {
-    const result = await this.currencyQueryService.getCurrencies()
-
-    return { result }
+    return this.currencyQueryService.getCurrencies()
   }
 
   @GrpcMethod('CurrencyService', 'GetCurrencyRate')

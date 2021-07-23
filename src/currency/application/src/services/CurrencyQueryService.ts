@@ -5,16 +5,18 @@ import { GetCurrencyRate } from '../commands'
 @Injectable()
 export class CurrencyQueryService {
   async getCurrencies() {
-    return [
-      {
-        code: 'USD',
-        name: 'United States dollar',
-      },
-      {
-        code: 'EUR',
-        name: 'Euro',
-      },
-    ]
+    return {
+      rows: [
+        {
+          code: 'USD',
+          name: 'United States dollar',
+        },
+        {
+          code: 'EUR',
+          name: 'Euro',
+        },
+      ],
+    }
   }
 
   async getCurrencyRate(query: GetCurrencyRate) {

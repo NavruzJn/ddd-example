@@ -66,6 +66,12 @@ export class TransactionApplicationService implements OnModuleInit {
       senderTransactionAmount = command.amount * currencyRate.rate
     }
 
+    if (senderTransactionAmount < senderAccountRequisite.balance) {
+      return {
+        errors: 'Not enough',
+      }
+    }
+
     if (beneficiaryAccountRequisite.currency !== command.currency) {
       const { result: currencyRate } = await this.currencyService
         .getCurrencyRate({ from: beneficiaryAccountRequisite.currency, to: command.currency })
@@ -100,7 +106,9 @@ export class TransactionApplicationService implements OnModuleInit {
 
     await this.transactionEntityRepository.save(beneficiaryTransaction)
 
-    return senderTransaction
+    return {
+      result: senderTransaction,
+    }
   }
 
   async update(command: UpdateCommand): Promise<any> {
@@ -116,21 +124,26 @@ export class TransactionApplicationService implements OnModuleInit {
       command.amount,
       command.currency,
       Status.New,
-      command.type,
     )
 
     await this.transactionEntityRepository.save(transaction)
 
-    return transaction
+    return {
+      result: {
+        transaction,
+      },
+    }
   }
 
   async changeStatus(command: ChangeStatusCommand): Promise<any> {
-    const account = await this.transactionEntityRepository.getById(command.id)
+    const transaction = await this.transactionEntityRepository.getById(command.id)
 
-    account.changeStatus(command.status)
+    transaction.changeStatus(command.status)
 
-    await this.transactionEntityRepository.save(account)
+    await this.transactionEntityRepository.save(transaction)
 
-    return account
+    return {
+      result: transaction,
+    }
   }
 }

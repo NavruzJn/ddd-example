@@ -5,7 +5,7 @@ import { ChangeStatusCommand, CreateCommand, UpdateCommand }     from '@transact
 import { transaction as transactionInterface }                   from '@protos/interfaces'
 import { clientOptions as transactionClientOptions }             from '@protos/transaction'
 
-@Controller({ path: '/account' })
+@Controller({ path: '/transactions' })
 export class TransactionController implements OnModuleInit {
   @Client(transactionClientOptions)
   private readonly transactionClient: ClientGrpc

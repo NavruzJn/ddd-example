@@ -65,7 +65,6 @@ export class Transaction extends AggregateRoot implements AccountProperties {
     amount: number,
     currency: string,
     status: Status,
-    type: Type,
   ) {
     const transactionUpdated = new TransactionUpdated(
       beneficiaryAccount,
@@ -73,7 +72,6 @@ export class Transaction extends AggregateRoot implements AccountProperties {
       amount,
       currency,
       status,
-      type,
     )
 
     this.when(transactionUpdated)
@@ -100,7 +98,6 @@ export class Transaction extends AggregateRoot implements AccountProperties {
     this.amount = event.amount
     this.currency = event.currency
     this.description = event.description
-    this.type = event.type
   }
 
   protected whenTransactionStatusChanged(event: TransactionStatusChanged) {

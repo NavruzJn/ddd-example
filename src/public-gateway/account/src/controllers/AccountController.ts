@@ -5,7 +5,7 @@ import { Body, Controller, OnModuleInit, Param, Post, Put, Req } from '@nestjs/c
 import { clientOptions as accountClientOptions }                 from '@protos/account'
 import { account as accountInterface }                           from '@protos/interfaces'
 
-@Controller({ path: '/account' })
+@Controller({ path: '/accounts' })
 export class AccountController implements OnModuleInit {
   @Client(accountClientOptions)
   private readonly accountClient: ClientGrpc

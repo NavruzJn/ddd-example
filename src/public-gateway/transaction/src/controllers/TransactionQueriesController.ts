@@ -4,7 +4,7 @@ import { Controller, Get, Param, Query }             from '@nestjs/common'
 import { transaction as transactionInterface }       from '@protos/interfaces'
 import { clientOptions as transactionClientOptions } from '@protos/transaction'
 
-@Controller({ path: '/transaction' })
+@Controller({ path: '/transactions' })
 export class TransactionQueriesController {
   @Client(transactionClientOptions)
   private readonly transactionClient: ClientGrpc

@@ -10,15 +10,11 @@ export class TransactionQueriesController {
 
   @GrpcMethod('TransactionService', 'GetTransactions')
   async getTransactions({ pager, filters }) {
-    const result = await this.accountQueriesService.getTransactions({ pager, filters })
-
-    return { result }
+    return this.accountQueriesService.getTransactions({ pager, filters })
   }
 
   @GrpcMethod('TransactionService', 'GetTransaction')
   async getTransaction({ id }) {
-    const result = await this.accountQueriesService.getTransaction(id)
-
-    return { result }
+    return this.accountQueriesService.getTransaction(id)
   }
 }

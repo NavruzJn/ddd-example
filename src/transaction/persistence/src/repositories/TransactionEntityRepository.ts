@@ -36,6 +36,10 @@ export class TransactionEntityRepository extends WriteRepository<TransactionEnti
   async getTransactions(pager, filters) {
     const qb = await this.repository.createQueryBuilder('transaction')
 
+    if (filters && filters.by && filters.direction) {
+      qb.orderBy(filters.by, filters.direction)
+    }
+
     if (pager) {
       const { take = 25, offset = 0 } = pager
       qb.limit(take)

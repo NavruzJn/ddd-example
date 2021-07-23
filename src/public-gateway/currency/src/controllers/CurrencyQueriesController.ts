@@ -4,7 +4,7 @@ import { Controller, Get, Query }                 from '@nestjs/common'
 import { clientOptions as currencyClientOptions } from '@protos/currency'
 import { currency as currencyInterface }          from '@protos/interfaces'
 
-@Controller({ path: '/currency' })
+@Controller({ path: '/currencies' })
 export class CurrencyQueriesController {
   @Client(currencyClientOptions)
   private readonly currencyClient: ClientGrpc

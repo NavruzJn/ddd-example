@@ -12,6 +12,8 @@ export class TransactionCreatedHandler implements Handler<TransactionCreated> {
   ) {}
 
   async handle(event: TransactionCreated): Promise<void> {
+    console.log(event)
+
     const { senderAccount, beneficiaryAccount, amount, type } = event
 
     let accountRequisite
@@ -34,6 +36,12 @@ export class TransactionCreatedHandler implements Handler<TransactionCreated> {
       throw new Error('Transaction account not found')
     }
 
-    await this.requisiteEntityRepository.save(accountRequisite)
+    try {
+      await this.requisiteEntityRepository.save(accountRequisite)
+    } catch (error) {
+      console.error(error)
+    }
+
+    return accountRequisite
   }
 }

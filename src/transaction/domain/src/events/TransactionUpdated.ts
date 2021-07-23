@@ -1,8 +1,8 @@
-import { Uuid }         from '@node-ts/ddd-types'
+import { Uuid }   from '@node-ts/ddd-types'
 
-import { Event }        from '@node-ts/bus-messages'
+import { Event }  from '@node-ts/bus-messages'
 
-import { Status, Type } from '../model'
+import { Status } from '../model'
 
 export class TransactionUpdated extends Event {
   static readonly NAME = 'transaction/transaction-updated'
@@ -17,7 +17,6 @@ export class TransactionUpdated extends Event {
     readonly amount: number,
     readonly currency: string,
     readonly status: Status,
-    readonly type: Type,
   ) {
     super()
   }

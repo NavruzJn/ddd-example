@@ -34,7 +34,9 @@ export class AccountEntityRepository extends WriteRepository<AccountEntity, Acco
   }
 
   async getAccounts(pager) {
-    const qb = await this.repository.createQueryBuilder('account')
+    const qb = await this.repository
+      .createQueryBuilder('account')
+      .leftJoinAndSelect('account.requisites', 'requisite')
 
     if (pager) {
       const { take = 25, offset = 0 } = pager
