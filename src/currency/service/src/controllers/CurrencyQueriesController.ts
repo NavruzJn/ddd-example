@@ -1,7 +1,7 @@
-import { GrpcMethod }                  from '@nestjs/microservices'
+import { GrpcMethod }                            from '@nestjs/microservices'
 
-import { CurrencyQueryService }        from '@currency/application'
-import { Controller, UseInterceptors } from '@nestjs/common'
+import { CurrencyQueryService, GetCurrencyRate } from '@currency/application'
+import { Controller, UseInterceptors }           from '@nestjs/common'
 
 @Controller()
 @UseInterceptors()
@@ -16,8 +16,8 @@ export class CurrencyQueriesController {
   }
 
   @GrpcMethod('CurrencyService', 'GetCurrencyRate')
-  async getCurrency({ id }) {
-    const result = await this.currencyQueryService.getCurrencyRate(id)
+  async getCurrency(query: GetCurrencyRate) {
+    const result = await this.currencyQueryService.getCurrencyRate(query)
 
     return { result }
   }

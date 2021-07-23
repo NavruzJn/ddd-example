@@ -1,0 +1,430 @@
+swagger: "2.0"
+info:
+  description: "Account Management Service REST API documentation"
+  version: "1.0.0"
+  title: "Account Management Service"
+basePath: "/"
+tags:
+  - name: "account"
+    description: "Account Domain"
+  - name: "currency"
+    description: "Currency Domain"
+  - name: "transaction"
+    description: "Transaction Domain"
+
+schemes:
+  - "https"
+  - "http"
+paths:
+  /accounts:
+    post:
+      tags:
+        - "account"
+      summary: "Create new account"
+      description: ""
+      operationId: "createAccount"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Account object"
+          required: true
+          schema:
+            type: "object"
+            required:
+              - "firstname"
+              - "lastname"
+              - "password"
+              - "email"
+              - "birthday"
+              - "requisites"
+            properties:
+              firstname:
+                type: "string"
+                example: "John"
+              lastname:
+                type: "string"
+                example: "Smith"
+              password:
+                type: "string"
+                example: "123(&3948123"
+              birthday:
+                type: "string"
+                example: "03-31-1998"
+              email:
+                type: "string"
+                example: "test@"
+              requisites:
+                type: "array"
+                items:
+                  type: "object"
+                  properties:
+                    balance:
+                      type: "number"
+                      example: 12356
+                    accountNumber:
+                      type: "string"
+                      example: "test_123"
+                    currency:
+                      type: "string"
+                      example: "USD"
+      responses:
+        "400":
+          description: "Bad request"
+        "200":
+          description: "Created Account"
+          schema:
+            $ref: "#/definitions/Account"
+    put:
+      tags:
+        - "account"
+      summary: "Update an existing account"
+      description: ""
+      operationId: "updateAccount"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Account object"
+          required: true
+          schema:
+            type: "object"
+            required:
+              - "firstname"
+              - "lastname"
+              - "password"
+              - "email"
+              - "birthday"
+              - "requisites"
+            properties:
+              firstname:
+                type: "string"
+                example: "John"
+              lastname:
+                type: "string"
+                example: "Smith"
+              password:
+                type: "string"
+                example: "123(&3948123"
+              birthday:
+                type: "string"
+                example: "03-31-1998"
+              email:
+                type: "string"
+                example: "test@"
+              requisites:
+                type: "array"
+                items:
+                  type: "object"
+                  properties:
+                    balance:
+                      type: "number"
+                      example: 12356
+                    accountNumber:
+                      type: "string"
+                      example: "test_123"
+                    currency:
+                      type: "string"
+                      example: "USD"
+      responses:
+        "400":
+          description: "Invalid input"
+        "200":
+          description: "Updated Account"
+          schema:
+            $ref: "#/definitions/Account"
+    get:
+      tags:
+        - "account"
+      summary: "Get an existing accounts"
+      description: ""
+      operationId: "getAccount"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Updated Account"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Account"
+  /accounts/{accountId}:
+    get:
+      tags:
+        - "account"
+      summary: "Find account by ID"
+      description: "Returns a single account"
+      operationId: "getByAccountId"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "accountId"
+          in: "path"
+          description: "ID of account to return"
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Account"
+        "404":
+          description: "Account not found"
+  /currencies:
+    get:
+      tags:
+        - "currency"
+      summary: "Get an currencies"
+      description: ""
+      operationId: "getCurrencies"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Updated Currency"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Currency"
+  /currencies/rate:
+    get:
+      tags:
+        - "currency"
+      summary: "Find account by ID"
+      description: "Returns currency rate"
+      operationId: "getCurrencyRate"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "from"
+          in: "query"
+          description: "from"
+          required: true
+          type: "string"
+        - name: "to"
+          in: "query"
+          description: "to"
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/CurrencyRate"
+  /transaction:
+    post:
+      tags:
+        - "transaction"
+      summary: "Create new transaction"
+      description: ""
+      operationId: "createTransaction"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Transaction object"
+          required: true
+          schema:
+            type: "object"
+            required:
+              - "senderAccount"
+              - "beneficiaryAccount"
+              - "description"
+              - "amount"
+              - "currency"
+            properties:
+              senderAccount:
+                type: "string"
+                example: "df3cfcf1-58a6-4975-8e4f-41a76c21eb81"
+                description: "Requisite account number of sender"
+              beneficiaryAccount:
+                type: "string"
+                example: "49758e4f-41a76-c21eb81-df3cfcf1-58a6"
+                description: "Requisite account number of beneficiary"
+              description:
+                type: "string"
+                example: "Test Transaction"
+              amount:
+                type: "string"
+                example: "03-31-1998"
+              currency:
+                type: "string"
+                example: "USD"
+      responses:
+        "400":
+          description: "Bad request"
+        "200":
+          description: "Created Transaction"
+          schema:
+            $ref: "#/definitions/Transaction"
+    get:
+      tags:
+        - "transaction"
+      summary: "Get an existing transactions"
+      description: ""
+      operationId: "getTransactions"
+      parameters:
+        - name: "take"
+          in: "query"
+          description: "Limit of transactions per page"
+          required: true
+          type: "string"
+        - name: "offset"
+          in: "query"
+          description: "page offset"
+          required: true
+          type: "string"
+        - name: "orderBy"
+          in: "query"
+          description: "order by column"
+          required: true
+          type: "string"
+        - name: "direction"
+          in: "query"
+          description: "ASC or DESC"
+          required: true
+          type: "string"
+          enum:
+            - "ASC"
+            - "DESC"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Existing Transactions"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Transaction"
+definitions:
+  Account:
+    type: "object"
+    required:
+      - "firstname"
+      - "lastname"
+      - "password"
+      - "email"
+      - "birthday"
+      - "requisites"
+    properties:
+      id:
+        type: "string"
+        example: "d7a79509-bafe-4f00-944a-459632cc7ced"
+      firstname:
+        type: "string"
+        example: "John"
+      lastname:
+        type: "string"
+        example: "Smith"
+      password:
+        type: "string"
+        example: "123(&3948123"
+      birthday:
+        type: "string"
+        example: "03-31-1998"
+      email:
+        type: "string"
+        example: "test@"
+      status:
+        type: "integer"
+        example: "0"
+      requisites:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            balance:
+              type: "number"
+              example: 12356
+            accountNumber:
+              type: "string"
+              example: "test_123"
+            currency:
+              type: "string"
+              example: "USD"
+
+    xml:
+      name: "Account"
+  Currency:
+    type: "object"
+    required:
+      - "firstname"
+      - "lastname"
+      - "password"
+      - "email"
+      - "birthday"
+      - "requisites"
+    properties:
+      name:
+        type: "string"
+        example: "Euro"
+      code:
+        type: "string"
+        example: "EUR"
+
+    xml:
+      name: "Currency"
+  CurrencyRate:
+    type: "object"
+    required:
+      - "from"
+      - "to"
+      - "rate"
+    properties:
+      from:
+        type: "string"
+        example: "Euro"
+      to:
+        type: "string"
+        example: "EUR"
+      rate:
+        type: "number"
+        example: 1.233
+    xml:
+      name: "CurrencyRate"
+  Transaction:
+    type: "object"
+    required:
+      - "senderAccount"
+      - "beneficiaryAccount"
+      - "description"
+      - "amount"
+      - "currency"
+    properties:
+      senderAccount:
+        type: "string"
+        example: "df3cfcf1-58a6-4975-8e4f-41a76c21eb81"
+        description: "Requisite account number of sender"
+      beneficiaryAccount:
+        type: "string"
+        example: "49758e4f-41a76-c21eb81-df3cfcf1-58a6"
+        description: "Requisite account number of beneficiary"
+      description:
+        type: "string"
+        example: "Test Transaction"
+      amount:
+        type: "string"
+        example: "03-31-1998"
+      status:
+        type: "integer"
+        example: 0
+      currency:
+        type: "string"
+        example: "USD"
+    xml:
+      name: "CurrencyRate"

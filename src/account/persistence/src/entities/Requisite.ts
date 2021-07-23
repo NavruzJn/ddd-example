@@ -15,10 +15,10 @@ export class Requisite {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
-  @Column({ unique: true, type: 'float' })
+  @Column({ type: 'float' })
   balance: number
 
-  @Column({ name: 'account_number' })
+  @Column({ unique: true, name: 'account_number' })
   accountNumber: string
 
   @ManyToOne(
