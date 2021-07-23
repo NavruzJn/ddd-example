@@ -1,10 +1,17 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm'
 
-import { Status }                                                                     from '@account/domain'
+import { Status }    from '@account/domain'
 
-import { Birthday }                                                                   from './Birthday'
-import { Email }                                                                      from './Email'
-import { Requisites }                                                                 from './Requisites'
+import { Birthday }  from './Birthday'
+import { Email }     from './Email'
+import { Requisite } from './Requisite'
 
 @Entity()
 export class Account {
@@ -16,9 +23,6 @@ export class Account {
 
   @Column(type => Email)
   email: Email
-
-  @Column(type => Requisites)
-  requisites: Requisites
 
   @Column()
   password: string
@@ -37,6 +41,15 @@ export class Account {
     default: Status.New,
   })
   status: Status
+
+  @OneToMany(
+    type => Requisite,
+    requisite => requisite.account,
+    {
+      cascade: true,
+    },
+  )
+  requisites?: Requisite[]
 
   @CreateDateColumn()
   createdAt: Date

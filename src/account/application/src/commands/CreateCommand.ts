@@ -1,4 +1,7 @@
-import { IsNotEmpty } from 'class-validator'
+import { Type }                                from 'class-transformer'
+import { IsArray, IsNotEmpty, ValidateNested } from 'class-validator'
+
+import { CreateRequisite }                     from './CreateRequisite'
 
 export class CreateCommand {
   @IsNotEmpty()
@@ -17,8 +20,8 @@ export class CreateCommand {
   birthday: string
 
   @IsNotEmpty()
-  accountNumber: string
-
-  @IsNotEmpty()
-  currency: string
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => CreateRequisite)
+  requisites: CreateRequisite[]
 }

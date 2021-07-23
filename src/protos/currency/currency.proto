@@ -5,7 +5,7 @@ import "../../common/common.proto";
 package currency;
 
 service CurrencyService {
-  rpc GetCurrencies(common.empty) returns (GetCurrencies) {}
+  rpc GetCurrencies(common.Empty) returns (GetCurrencies) {}
   rpc GetCurrencyRate(GetCurrencyRateRequest) returns (GetCurrencyRateResponse) {}
 }
 

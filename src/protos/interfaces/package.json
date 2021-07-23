@@ -4,7 +4,7 @@
   "main": "src/index.ts",
   "license": "MIT",
   "scripts": {
-    "compile": "node_modules/.bin/rxjs-grpc -o src/index.ts ../common/*.proto ../account/*.proto ../transaction/*.proto"
+    "compile": "node_modules/.bin/rxjs-grpc -o src/index.ts ../common/*.proto ../account/*.proto ../transaction/*.proto ../currency/*.proto"
   },
   "dependencies": {
     "grpc": "^1.24.10",

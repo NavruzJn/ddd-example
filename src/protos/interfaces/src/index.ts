@@ -161,6 +161,18 @@ export namespace account {
     confirmed?: boolean | null
   }
 
+  /** Properties of a Requisite. */
+  export interface Requisite {
+    /** Requisite accountNumber */
+    accountNumber?: string | null
+
+    /** Requisite currency */
+    currency?: string | null
+
+    /** Requisite balance */
+    balance?: number | null
+  }
+
   /** Properties of an Account. */
   export interface Account {
     /** Account id */
@@ -183,6 +195,9 @@ export namespace account {
 
     /** Account birthday */
     birthday?: account.Birthday | null
+
+    /** Account requisites */
+    requisites?: account.Requisite[] | null
   }
 
   /** Properties of a CreateAccountRequest. */
@@ -202,11 +217,8 @@ export namespace account {
     /** CreateAccountRequest lastname */
     lastname?: string | null
 
-    /** CreateAccountRequest accountNumber */
-    accountNumber?: string | null
-
-    /** CreateAccountRequest currency */
-    currency?: string | null
+    /** CreateAccountRequest requisites */
+    requisites?: account.Requisite[] | null
   }
 
   /** Properties of a CreateAccountErrors. */
@@ -226,11 +238,8 @@ export namespace account {
     /** CreateAccountErrors lastname */
     lastname?: string | null
 
-    /** CreateAccountErrors accountNumber */
-    accountNumber?: string | null
-
-    /** CreateAccountErrors currency */
-    currency?: string | null
+    /** CreateAccountErrors requisites */
+    requisites?: account.Requisite[] | null
   }
 
   /** Properties of a CreateAccountResponse. */
@@ -477,6 +486,12 @@ export namespace transaction {
     Rejected = 2,
   }
 
+  /** Type enum. */
+  export enum Type {
+    Conversion = 0,
+    Transfer = 1,
+  }
+
   /** Properties of a Transaction. */
   export interface Transaction {
     /** Transaction id */
@@ -505,6 +520,9 @@ export namespace transaction {
 
     /** Transaction status */
     status?: transaction.Status | null
+
+    /** Transaction type */
+    type?: transaction.Type | null
   }
 
   /** Properties of a TransactionsOrder. */
@@ -568,6 +586,9 @@ export namespace transaction {
 
     /** CreateTransactionRequest currency */
     currency?: string | null
+
+    /** CreateTransactionRequest type */
+    type?: transaction.Type | null
   }
 
   /** Properties of a CreateTransactionErrors. */
@@ -586,6 +607,9 @@ export namespace transaction {
 
     /** CreateTransactionErrors currency */
     currency?: string | null
+
+    /** CreateTransactionErrors type */
+    type?: transaction.Type | null
   }
 
   /** Properties of a CreateTransactionResponse. */
@@ -613,6 +637,9 @@ export namespace transaction {
 
     /** UpdateTransactionRequest currency */
     currency?: string | null
+
+    /** UpdateTransactionRequest type */
+    type?: transaction.Type | null
   }
 
   /** Properties of an UpdateTransactionErrors. */
@@ -631,6 +658,9 @@ export namespace transaction {
 
     /** UpdateTransactionErrors currency */
     currency?: string | null
+
+    /** UpdateTransactionErrors type */
+    type?: transaction.Type | null
   }
 
   /** Properties of an UpdateTransactionResponse. */
@@ -667,5 +697,104 @@ export namespace transaction {
 
     /** ChangeTransactionResponse result */
     result?: transaction.Transaction | null
+  }
+}
+
+/** Namespace currency. */
+export namespace currency {
+  /** Contains all the RPC service clients. */
+  export interface ClientFactory {
+    /**
+     * Returns the CurrencyService service client.
+     */
+    getCurrencyService(): currency.CurrencyService
+  }
+
+  /** Builder for an RPC service server. */
+  export interface ServerBuilder {
+    /**
+     * Adds a CurrencyService service implementation.
+     * @param impl CurrencyService service implementation
+     */
+    addCurrencyService(impl: currency.CurrencyService): currency.ServerBuilder
+  }
+
+  /** Constructs a new CurrencyService service. */
+  export interface CurrencyService {
+    /**
+     * Calls GetCurrencies.
+     * @param request Empty message or plain object
+     * @param metadata Optional metadata
+     * @returns Promise
+     */
+    getCurrencies(
+      request: common.Empty,
+      metadata?: grpc.Metadata,
+    ): Observable<currency.GetCurrencies>
+
+    /**
+     * Calls GetCurrencyRate.
+     * @param request GetCurrencyRateRequest message or plain object
+     * @param metadata Optional metadata
+     * @returns Promise
+     */
+    getCurrencyRate(
+      request: currency.GetCurrencyRateRequest,
+      metadata?: grpc.Metadata,
+    ): Observable<currency.GetCurrencyRateResponse>
+  }
+
+  /** Properties of a Currency. */
+  export interface Currency {
+    /** Currency code */
+    code?: string | null
+
+    /** Currency name */
+    name?: string | null
+  }
+
+  /** Properties of a CurrencyRate. */
+  export interface CurrencyRate {
+    /** CurrencyRate from */
+    from?: string | null
+
+    /** CurrencyRate to */
+    to?: string | null
+
+    /** CurrencyRate rate */
+    rate?: number | null
+  }
+
+  /** Properties of a GetCurrencyRateRequest. */
+  export interface GetCurrencyRateRequest {
+    /** GetCurrencyRateRequest from */
+    from?: string | null
+
+    /** GetCurrencyRateRequest to */
+    to?: string | null
+  }
+
+  /** Properties of a GetCurrencyRateErrors. */
+  export interface GetCurrencyRateErrors {
+    /** GetCurrencyRateErrors from */
+    from?: string | null
+
+    /** GetCurrencyRateErrors to */
+    to?: string | null
+  }
+
+  /** Properties of a GetCurrencyRateResponse. */
+  export interface GetCurrencyRateResponse {
+    /** GetCurrencyRateResponse errors */
+    errors?: currency.GetCurrencyRateErrors | null
+
+    /** GetCurrencyRateResponse result */
+    result?: currency.CurrencyRate | null
+  }
+
+  /** Properties of a GetCurrencies. */
+  export interface GetCurrencies {
+    /** GetCurrencies result */
+    result?: currency.Currency[] | null
   }
 }

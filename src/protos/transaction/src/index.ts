@@ -22,8 +22,8 @@ export const PROTO_PATH = path.join(protosPath, '../transaction.proto')
 export const clientOptions: ClientOptions = {
   transport: Transport.GRPC,
   options: {
-    package: 'currency',
-    url: process.env.IDENTITY_SERVICE_URL || 'currency:50051',
+    package: 'transaction',
+    url: process.env.IDENTITY_SERVICE_URL || 'transaction:50051',
     protoPath: PROTO_PATH,
     loader: {
       arrays: true,
@@ -35,7 +35,7 @@ export const clientOptions: ClientOptions = {
 export const serverOptions: ClientOptions = {
   transport: Transport.GRPC,
   options: {
-    package: 'currency',
+    package: 'transaction',
     url: '0.0.0.0:50051',
     protoPath: PROTO_PATH,
     loader: {
@@ -47,7 +47,10 @@ export const serverOptions: ClientOptions = {
 
 export const createCurrencyService = () => {
   const packageDefinition = loadSync(clientOptions.options.protoPath, clientOptions.options.loader)
-  const { currency }: any = grpc.loadPackageDefinition(packageDefinition)
+  const { transaction }: any = grpc.loadPackageDefinition(packageDefinition)
 
-  return new currency.CurrencyService(clientOptions.options.url, grpc.credentials.createInsecure())
+  return new transaction.TransactionService(
+    clientOptions.options.url,
+    grpc.credentials.createInsecure(),
+  )
 }

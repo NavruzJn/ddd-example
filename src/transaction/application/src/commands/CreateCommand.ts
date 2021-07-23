@@ -1,5 +1,7 @@
 import { IsNotEmpty } from 'class-validator'
 
+import { Type }       from '@transaction/domain'
+
 export class CreateCommand {
   @IsNotEmpty()
   senderId: string
@@ -15,4 +17,7 @@ export class CreateCommand {
 
   @IsNotEmpty()
   currency: string
+
+  @IsNotEmpty()
+  type: Type
 }

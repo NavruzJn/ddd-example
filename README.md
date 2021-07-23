@@ -8,18 +8,19 @@ Let's build a small server-side app that consists of 3 domains involved in solvi
 
 Also, there can be added extra participants like bank, activity log, etc.
 
-###Introduction
+### Introduction
 
 
 
-###Launch
+### Launch
 
-1. docker-compose up -d - to start all containers (pg, rabbitmq, account service, transaction service, currency service)
+1. ```docker-compose run yarn``` - to install all dependencies
+2. ```docker-compose up -d``` - to start all containers (pg, rabbitmq, account service, transaction service, currency service)
 
-###Tools
+### Tools
 
 
-###TODOs
+### TODOs
 
 1. add logic to perform transactions between accounts
 2. add e2e and unit tests

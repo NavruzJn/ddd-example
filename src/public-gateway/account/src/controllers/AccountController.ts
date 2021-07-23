@@ -19,7 +19,7 @@ export class AccountController implements OnModuleInit {
   }
 
   @Post()
-  createTicket(@Req() req: any, @Body() body: CreateCommand) {
+  createAccount(@Req() req: any, @Body() body: CreateCommand) {
     return this.accountService.createAccount(body)
   }
 

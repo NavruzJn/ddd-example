@@ -1,8 +1,8 @@
-import { Uuid }                        from '@node-ts/ddd-types'
+import { Uuid }                       from '@node-ts/ddd-types'
 
-import { Event }                       from '@node-ts/bus-messages'
+import { Event }                      from '@node-ts/bus-messages'
 
-import { Birthday, Email, Requisites } from '../model'
+import { Birthday, Email, Requisite } from '../model'
 
 export class AccountCreated extends Event {
   static readonly NAME = 'account/account-created'
@@ -15,7 +15,7 @@ export class AccountCreated extends Event {
     readonly accountId: Uuid,
     readonly birthday: Birthday,
     readonly email: Email,
-    readonly requisites: Requisites,
+    readonly requisites: Requisite[],
     readonly password: string,
     readonly firstname: string,
     readonly lastname: string,

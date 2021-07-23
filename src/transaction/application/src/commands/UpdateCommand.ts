@@ -1,5 +1,7 @@
 import { IsNotEmpty } from 'class-validator'
 
+import { Type }       from '@transaction/domain'
+
 export class UpdateCommand {
   @IsNotEmpty()
   id: string
@@ -15,4 +17,7 @@ export class UpdateCommand {
 
   @IsNotEmpty()
   currency: string
+
+  @IsNotEmpty()
+  type: Type
 }

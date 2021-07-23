@@ -31,6 +31,12 @@ message Email {
   bool confirmed = 2;
 }
 
+message Requisite {
+  string accountNumber = 1;
+  string currency = 2;
+  float balance = 3;
+}
+
 message Account {
   string id = 1;
   string firstname = 2;
@@ -39,6 +45,7 @@ message Account {
   string lastSession = 5;
   Email email = 7;
   Birthday birthday = 9;
+  repeated Requisite requisites = 10;
 }
 
 message CreateAccountRequest {
@@ -47,8 +54,7 @@ message CreateAccountRequest {
   string birthday = 3;
   string email = 4;
   string lastname = 5;
-  string accountNumber = 6;
-  string currency = 7;
+  repeated Requisite requisites = 6;
 }
 
 message CreateAccountErrors {
@@ -57,8 +63,7 @@ message CreateAccountErrors {
   string birthday = 3;
   string email = 4;
   string lastname = 5;
-  string accountNumber = 6;
-  string currency = 7;
+  repeated Requisite requisites = 6;
 }
 
 message CreateAccountResponse {

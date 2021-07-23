@@ -4,6 +4,7 @@ import { AggregateRootProperties }                                          from
 
 import { TransactionCreated, TransactionStatusChanged, TransactionUpdated } from '../events'
 import { Status }                                                           from './Status'
+import { Type }                                                             from './Type'
 
 export interface AccountProperties extends AggregateRootProperties {
   senderId: Uuid
@@ -12,6 +13,7 @@ export interface AccountProperties extends AggregateRootProperties {
   amount: number
   currency: string
   status: Status
+  type: Type
 }
 
 export class Transaction extends AggregateRoot implements AccountProperties {
@@ -27,6 +29,8 @@ export class Transaction extends AggregateRoot implements AccountProperties {
 
   status: Status
 
+  type: Type
+
   static async create(
     id: Uuid,
     senderId: Uuid,
@@ -35,6 +39,7 @@ export class Transaction extends AggregateRoot implements AccountProperties {
     amount: number,
     currency: string,
     status: Status,
+    type: Type,
   ): Promise<Transaction> {
     const transaction = new Transaction(id)
 
@@ -46,6 +51,7 @@ export class Transaction extends AggregateRoot implements AccountProperties {
       amount,
       currency,
       status,
+      type,
     )
 
     transaction.when(transactionCreated)
@@ -59,6 +65,7 @@ export class Transaction extends AggregateRoot implements AccountProperties {
     amount: number,
     currency: string,
     status: Status,
+    type: Type,
   ) {
     const transactionUpdated = new TransactionUpdated(
       beneficiaryId,
@@ -66,6 +73,7 @@ export class Transaction extends AggregateRoot implements AccountProperties {
       amount,
       currency,
       status,
+      type,
     )
 
     this.when(transactionUpdated)
@@ -84,6 +92,7 @@ export class Transaction extends AggregateRoot implements AccountProperties {
     this.currency = event.currency
     this.description = event.description
     this.status = Status.New
+    this.type = event.type
   }
 
   protected whenAccountUpdated(event: TransactionUpdated): void {
@@ -91,6 +100,7 @@ export class Transaction extends AggregateRoot implements AccountProperties {
     this.amount = event.amount
     this.currency = event.currency
     this.description = event.description
+    this.type = event.type
   }
 
   protected whenTransactionStatusChanged(event: TransactionStatusChanged) {

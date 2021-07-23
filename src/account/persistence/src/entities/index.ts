@@ -1,4 +1,4 @@
 export * from './Account'
 export * from './Birthday'
-export * from './Requisites'
+export * from './Requisite'
 export * from './Email'

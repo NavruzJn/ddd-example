@@ -18,6 +18,11 @@ enum Status {
   Rejected = 2;
 }
 
+enum Type {
+  Conversion = 0;
+  Transfer = 1;
+}
+
 message Transaction {
   string id = 1;
   string senderId = 2;
@@ -28,6 +33,7 @@ message Transaction {
   string updatedAt = 7;
   string createAt = 8;
   Status status = 9;
+  Type type = 10;
 }
 
 message TransactionsOrder {
@@ -63,6 +69,7 @@ message CreateTransactionRequest {
   string description = 3;
   float amount = 4;
   string currency = 5;
+  Type type = 6;
 }
 
 message CreateTransactionErrors {
@@ -71,6 +78,7 @@ message CreateTransactionErrors {
   string description = 3;
   float amount = 4;
   string currency = 5;
+  Type type = 6;
 }
 
 message CreateTransactionResponse {
@@ -84,6 +92,7 @@ message UpdateTransactionRequest {
   string description = 3;
   float amount = 4;
   string currency = 5;
+  Type type = 6;
 }
 
 message UpdateTransactionErrors {
@@ -92,6 +101,7 @@ message UpdateTransactionErrors {
   string description = 3;
   float amount = 4;
   string currency = 5;
+  Type type = 6;
 }
 
 message UpdateTransactionResponse {

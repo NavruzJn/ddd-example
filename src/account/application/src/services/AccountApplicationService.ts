@@ -23,9 +23,8 @@ export class AccountApplicationService {
       command.firstname,
       command.lastname,
       command.password,
-      command.birthday,
-      command.accountNumber,
-      command.currency,
+      new Date(command.birthday),
+      command.requisites,
     )
 
     await this.accountStoreRepository.save(account)
@@ -36,7 +35,7 @@ export class AccountApplicationService {
   async update(command: UpdateCommand): Promise<any> {
     const account = await this.accountStoreRepository.getById(command.id)
 
-    account.update(command.email, command.firstname, command.lastname, command.birthday)
+    account.update(command.email, command.firstname, command.lastname, new Date(command.birthday))
 
     await this.accountStoreRepository.save(account)
 

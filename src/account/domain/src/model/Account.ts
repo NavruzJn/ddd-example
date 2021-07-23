@@ -10,7 +10,7 @@ import {
 } from '../events'
 import { Birthday }                      from './Birthday'
 import { Email }                         from './Email'
-import { Requisites }                    from './Requisites'
+import { Requisite }                     from './Requisite'
 import { Status }                        from './Status'
 
 export interface AccountProperties extends AggregateRootProperties {
@@ -19,7 +19,7 @@ export interface AccountProperties extends AggregateRootProperties {
   password: string
   firstname: string
   lastname: string
-  requisites: Requisites
+  requisites: Requisite[]
   status: Status
 }
 
@@ -28,7 +28,7 @@ export class Account extends AggregateRoot implements AccountProperties {
 
   email: Email
 
-  requisites: Requisites
+  requisites: Requisite[]
 
   status: Status
 
@@ -47,8 +47,11 @@ export class Account extends AggregateRoot implements AccountProperties {
     lastname: string,
     password: string,
     birthday: Date,
-    accountNumber: string,
-    currency: string,
+    requisites: {
+      accountNumber: string
+      balance: number
+      currency: string
+    }[],
   ): Promise<Account> {
     const account = new Account(id)
 
@@ -56,7 +59,9 @@ export class Account extends AggregateRoot implements AccountProperties {
       id,
       new Birthday(birthday),
       new Email(email),
-      new Requisites(accountNumber, currency),
+      requisites.map(
+        requisite => new Requisite(requisite.accountNumber, requisite.currency, requisite.balance),
+      ),
       password,
       firstname,
       lastname,

@@ -19,6 +19,7 @@ export class TransactionApplicationService {
       command.amount,
       command.currency,
       Status.New,
+      command.type,
     )
 
     await this.transactionEntityRepository.save(transaction)
@@ -39,6 +40,7 @@ export class TransactionApplicationService {
       command.amount,
       command.currency,
       Status.New,
+      command.type,
     )
 
     await this.transactionEntityRepository.save(transaction)
