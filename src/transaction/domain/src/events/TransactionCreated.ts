@@ -13,8 +13,8 @@ export class TransactionCreated extends Event {
 
   constructor(
     readonly transactionId: Uuid,
-    readonly senderId: Uuid,
-    readonly beneficiaryId: Uuid,
+    readonly senderAccount: Uuid,
+    readonly beneficiaryAccount: Uuid,
     readonly description: string,
     readonly amount: number,
     readonly currency: string,

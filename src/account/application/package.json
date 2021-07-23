@@ -5,6 +5,7 @@
   "main": "src/index.ts",
   "dependencies": {
     "@account/domain": "0.0.0",
+    "@transaction/domain": "0.0.0",
     "@account/persistence": "0.0.0",
     "@monstrs/nestjs-bus": "^0.1.15",
     "@monstrs/nestjs-map-errors-interceptor": "^0.1.3",

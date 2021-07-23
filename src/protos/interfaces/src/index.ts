@@ -80,6 +80,17 @@ export namespace account {
     ): Observable<account.GetAccountsResponse>
 
     /**
+     * Calls GetRequisiteByAccountNumber.
+     * @param request GetRequisiteByAccountNumberRequest message or plain object
+     * @param metadata Optional metadata
+     * @returns Promise
+     */
+    getRequisiteByAccountNumber(
+      request: account.GetRequisiteByAccountNumberRequest,
+      metadata?: grpc.Metadata,
+    ): Observable<account.GetRequisiteByAccountNumberResponse>
+
+    /**
      * Calls CreateAccount.
      * @param request CreateAccountRequest message or plain object
      * @param metadata Optional metadata
@@ -163,6 +174,9 @@ export namespace account {
 
   /** Properties of a Requisite. */
   export interface Requisite {
+    /** Requisite id */
+    id?: string | null
+
     /** Requisite accountNumber */
     accountNumber?: string | null
 
@@ -171,6 +185,9 @@ export namespace account {
 
     /** Requisite balance */
     balance?: number | null
+
+    /** Requisite account */
+    account?: account.Account | null
   }
 
   /** Properties of an Account. */
@@ -399,6 +416,27 @@ export namespace account {
 
     /** ChangeStatusResponse result */
     result?: account.Account | null
+  }
+
+  /** Properties of a GetRequisiteByAccountNumberRequest. */
+  export interface GetRequisiteByAccountNumberRequest {
+    /** GetRequisiteByAccountNumberRequest accountNumber */
+    accountNumber?: string | null
+  }
+
+  /** Properties of a GetRequisiteByAccountNumberErrors. */
+  export interface GetRequisiteByAccountNumberErrors {
+    /** GetRequisiteByAccountNumberErrors accountNumber */
+    accountNumber?: string | null
+  }
+
+  /** Properties of a GetRequisiteByAccountNumberResponse. */
+  export interface GetRequisiteByAccountNumberResponse {
+    /** GetRequisiteByAccountNumberResponse errors */
+    errors?: account.GetRequisiteByAccountNumberErrors | null
+
+    /** GetRequisiteByAccountNumberResponse result */
+    result?: account.Requisite | null
   }
 }
 

@@ -7,16 +7,16 @@ export class Transaction {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
-  @Column({ name: 'sender_id' })
-  senderId: string
+  @Column({ name: 'sender_account' })
+  senderAccount: string
 
-  @Column({ name: 'beneficiary_id' })
-  beneficiaryId: string
+  @Column({ name: 'beneficiary_account' })
+  beneficiaryAccount: string
 
   @Column()
   description: string
 
-  @Column()
+  @Column({ type: 'float' })
   amount: number
 
   @Column()

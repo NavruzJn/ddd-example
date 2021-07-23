@@ -19,14 +19,14 @@ enum Status {
 }
 
 enum Type {
-  Conversion = 0;
-  Transfer = 1;
+  Active = 0;
+  Passive = 1;
 }
 
 message Transaction {
   string id = 1;
-  string senderId = 2;
-  string beneficiaryId = 3;
+  string senderAccount = 2;
+  string beneficiaryAccount = 3;
   string description = 4;
   float amount = 5;
   string currency = 6;
@@ -64,21 +64,19 @@ message GetTransactionResponse{
 }
 
 message CreateTransactionRequest {
-  string senderId = 1;
-  string beneficiaryId = 2;
+  string senderAccount = 1;
+  string beneficiaryAccount = 2;
   string description = 3;
   float amount = 4;
   string currency = 5;
-  Type type = 6;
 }
 
 message CreateTransactionErrors {
   string senderId = 1;
-  string beneficiaryId = 2;
+  string beneficiaryAccount = 2;
   string description = 3;
   float amount = 4;
   string currency = 5;
-  Type type = 6;
 }
 
 message CreateTransactionResponse {
@@ -88,7 +86,7 @@ message CreateTransactionResponse {
 
 message UpdateTransactionRequest {
   string id = 1;
-  string beneficiaryId = 2;
+  string beneficiaryAccount = 2;
   string description = 3;
   float amount = 4;
   string currency = 5;
@@ -97,7 +95,7 @@ message UpdateTransactionRequest {
 
 message UpdateTransactionErrors {
   string id = 1;
-  string beneficiaryId = 2;
+  string beneficiaryAccount = 2;
   string description = 3;
   float amount = 4;
   string currency = 5;

@@ -8,19 +8,17 @@ import {
   UpdateDateColumn,
 } from 'typeorm'
 
-import { Requisite as RequisitesEntity } from '@account/domain'
-
-import { Account }                       from './Account'
+import { Account } from './Account'
 
 @Entity()
-export class Requisite extends RequisitesEntity {
+export class Requisite {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
-  @Column({ unique: true })
-  amount: number
+  @Column({ unique: true, type: 'float' })
+  balance: number
 
-  @Column()
+  @Column({ name: 'account_number' })
   accountNumber: string
 
   @ManyToOne(

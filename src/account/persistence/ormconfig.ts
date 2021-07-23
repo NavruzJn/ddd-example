@@ -1,1 +1,3 @@
-module.exports = require('./src/config').default
+import config from './src/config'
+
+export default config

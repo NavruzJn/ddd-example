@@ -73,6 +73,8 @@ services:
     depends_on:
       - rabbitmq
       - db
+      - account
+      - currency
     networks:
       - default
 

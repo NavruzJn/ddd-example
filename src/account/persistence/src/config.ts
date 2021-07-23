@@ -1,7 +1,7 @@
-import { ConnectionOptions } from 'typeorm'
+import { ConnectionOptions }  from 'typeorm'
 
-import migrations            from './migrations'
-import { Account }           from './entities'
+import migrations             from './migrations'
+import { Account, Requisite } from './entities'
 
 const config: ConnectionOptions = {
   type: 'postgres',
@@ -10,7 +10,7 @@ const config: ConnectionOptions = {
   database: process.env.DB_NAME || 'db',
   username: process.env.DB_USERNAME || 'postgres',
   password: process.env.DB_PASSWORD || 'password',
-  entities: [Account],
+  entities: [Account, Requisite],
   migrations,
   migrationsRun: true,
   synchronize: false,

@@ -14,7 +14,7 @@ import {
 
 @Injectable()
 export class AccountApplicationService {
-  constructor(private readonly accountStoreRepository: AccountEntityRepository) {}
+  constructor(private readonly accountEntityRepository: AccountEntityRepository) {}
 
   async create(command: CreateCommand): Promise<any> {
     const account = await Account.create(
@@ -27,47 +27,47 @@ export class AccountApplicationService {
       command.requisites,
     )
 
-    await this.accountStoreRepository.save(account)
+    await this.accountEntityRepository.save(account)
 
     return account
   }
 
   async update(command: UpdateCommand): Promise<any> {
-    const account = await this.accountStoreRepository.getById(command.id)
+    const account = await this.accountEntityRepository.getById(command.id)
 
     account.update(command.email, command.firstname, command.lastname, new Date(command.birthday))
 
-    await this.accountStoreRepository.save(account)
+    await this.accountEntityRepository.save(account)
 
     return account
   }
 
   async confirmEmail(command: ConfirmEmailCommand): Promise<any> {
-    const account = await this.accountStoreRepository.getById(command.id)
+    const account = await this.accountEntityRepository.getById(command.id)
 
     account.confirmEmail()
 
-    await this.accountStoreRepository.save(account)
+    await this.accountEntityRepository.save(account)
 
     return account
   }
 
   async confirmBirthday(command: ConfirmBirthdayCommand): Promise<any> {
-    const account = await this.accountStoreRepository.getById(command.id)
+    const account = await this.accountEntityRepository.getById(command.id)
 
     account.confirmBirthday()
 
-    await this.accountStoreRepository.save(account)
+    await this.accountEntityRepository.save(account)
 
     return account
   }
 
   async changeStatus(command: ChangeStatusCommand): Promise<any> {
-    const account = await this.accountStoreRepository.getById(command.id)
+    const account = await this.accountEntityRepository.getById(command.id)
 
     account.changeStatus(command.status)
 
-    await this.accountStoreRepository.save(account)
+    await this.accountEntityRepository.save(account)
 
     return account
   }

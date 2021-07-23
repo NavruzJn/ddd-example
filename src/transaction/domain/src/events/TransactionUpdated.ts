@@ -12,7 +12,7 @@ export class TransactionUpdated extends Event {
   $version = 0
 
   constructor(
-    readonly beneficiaryId: Uuid,
+    readonly beneficiaryAccount: Uuid,
     readonly description: string,
     readonly amount: number,
     readonly currency: string,

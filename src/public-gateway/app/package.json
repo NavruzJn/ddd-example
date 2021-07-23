@@ -16,6 +16,7 @@
     "@nestjs/platform-express": "^8.0.4",
     "@public-gateway/account": "0.0.0",
     "@public-gateway/currency": "0.0.0",
+    "@public-gateway/transaction": "0.0.0",
     "@sentry/node": "^6.0.3"
   },
   "devDependencies": {

@@ -7,7 +7,7 @@ export class UpdateCommand {
   id: string
 
   @IsNotEmpty()
-  beneficiaryId: string
+  beneficiaryAccount: string
 
   @IsNotEmpty()
   description: string

@@ -9,12 +9,29 @@ export class AccountQueriesController {
   constructor(private readonly accountQueriesService: AccountQueryService) {}
 
   @GrpcMethod('AccountService', 'GetAccounts')
-  getAccounts({ pager, filters }) {
-    return this.accountQueriesService.getAccounts({ pager })
+  async getAccounts({ pager, filters }) {
+    const result = await this.accountQueriesService.getAccounts({ pager })
+
+    return {
+      result,
+    }
   }
 
   @GrpcMethod('AccountService', 'GetAccount')
-  getApplicationAccounts({ id }) {
-    return this.accountQueriesService.getAccount(id)
+  async getAccount({ id }) {
+    const result = await this.accountQueriesService.getAccount(id)
+
+    return {
+      result,
+    }
+  }
+
+  @GrpcMethod('AccountService', 'GetRequisiteByAccountNumber')
+  async getRequisiteByAccountNumber({ accountNumber }) {
+    const result = await this.accountQueriesService.getRequisiteByAccountNumber(accountNumber)
+
+    return {
+      result,
+    }
   }
 }

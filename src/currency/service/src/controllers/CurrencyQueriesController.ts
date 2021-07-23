@@ -9,12 +9,16 @@ export class CurrencyQueriesController {
   constructor(private readonly currencyQueryService: CurrencyQueryService) {}
 
   @GrpcMethod('CurrencyService', 'GetCurrencies')
-  getAccounts() {
-    return this.currencyQueryService.getCurrencies()
+  async getCurrencies() {
+    const result = await this.currencyQueryService.getCurrencies()
+
+    return { result }
   }
 
   @GrpcMethod('CurrencyService', 'GetCurrencyRate')
-  getApplicationAccounts({ id }) {
-    return this.currencyQueryService.getCurrencyRate(id)
+  async getCurrency({ id }) {
+    const result = await this.currencyQueryService.getCurrencyRate(id)
+
+    return { result }
   }
 }

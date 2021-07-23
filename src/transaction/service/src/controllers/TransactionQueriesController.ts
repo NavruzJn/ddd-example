@@ -9,12 +9,16 @@ export class TransactionQueriesController {
   constructor(private readonly accountQueriesService: TransactionQueryService) {}
 
   @GrpcMethod('TransactionService', 'GetTransactions')
-  getTransactions({ pager, filters }) {
-    return this.accountQueriesService.getTransactions({ pager, filters })
+  async getTransactions({ pager, filters }) {
+    const result = await this.accountQueriesService.getTransactions({ pager, filters })
+
+    return { result }
   }
 
   @GrpcMethod('TransactionService', 'GetTransaction')
-  getTransaction({ id }) {
-    return this.accountQueriesService.getTransaction(id)
+  async getTransaction({ id }) {
+    const result = await this.accountQueriesService.getTransaction(id)
+
+    return { result }
   }
 }

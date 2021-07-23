@@ -7,8 +7,8 @@ import { Status }                                                           from
 import { Type }                                                             from './Type'
 
 export interface AccountProperties extends AggregateRootProperties {
-  senderId: Uuid
-  beneficiaryId: Uuid
+  senderAccount: Uuid
+  beneficiaryAccount: Uuid
   description: string
   amount: number
   currency: string
@@ -17,9 +17,9 @@ export interface AccountProperties extends AggregateRootProperties {
 }
 
 export class Transaction extends AggregateRoot implements AccountProperties {
-  senderId: Uuid
+  senderAccount: Uuid
 
-  beneficiaryId: Uuid
+  beneficiaryAccount: Uuid
 
   description: string
 
@@ -33,8 +33,8 @@ export class Transaction extends AggregateRoot implements AccountProperties {
 
   static async create(
     id: Uuid,
-    senderId: Uuid,
-    beneficiaryId: Uuid,
+    senderAccount: Uuid,
+    beneficiaryAccount: Uuid,
     description: string,
     amount: number,
     currency: string,
@@ -45,8 +45,8 @@ export class Transaction extends AggregateRoot implements AccountProperties {
 
     const transactionCreated = new TransactionCreated(
       id,
-      senderId,
-      beneficiaryId,
+      senderAccount,
+      beneficiaryAccount,
       description,
       amount,
       currency,
@@ -60,7 +60,7 @@ export class Transaction extends AggregateRoot implements AccountProperties {
   }
 
   public update(
-    beneficiaryId: Uuid,
+    beneficiaryAccount: Uuid,
     description: string,
     amount: number,
     currency: string,
@@ -68,7 +68,7 @@ export class Transaction extends AggregateRoot implements AccountProperties {
     type: Type,
   ) {
     const transactionUpdated = new TransactionUpdated(
-      beneficiaryId,
+      beneficiaryAccount,
       description,
       amount,
       currency,
@@ -86,8 +86,8 @@ export class Transaction extends AggregateRoot implements AccountProperties {
   }
 
   protected whenTransactionCreated(event: TransactionCreated) {
-    this.beneficiaryId = event.beneficiaryId
-    this.senderId = event.senderId
+    this.beneficiaryAccount = event.beneficiaryAccount
+    this.senderAccount = event.senderAccount
     this.amount = event.amount
     this.currency = event.currency
     this.description = event.description
@@ -96,7 +96,7 @@ export class Transaction extends AggregateRoot implements AccountProperties {
   }
 
   protected whenAccountUpdated(event: TransactionUpdated): void {
-    this.beneficiaryId = event.beneficiaryId
+    this.beneficiaryAccount = event.beneficiaryAccount
     this.amount = event.amount
     this.currency = event.currency
     this.description = event.description

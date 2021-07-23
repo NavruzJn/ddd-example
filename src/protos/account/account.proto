@@ -7,6 +7,7 @@ package account;
 service AccountService {
   rpc GetAccount(GetAccountRequest) returns (GetAccountResponse) {}
   rpc GetAccounts(common.Empty) returns (GetAccountsResponse) {}
+  rpc GetRequisiteByAccountNumber(GetRequisiteByAccountNumberRequest) returns (GetRequisiteByAccountNumberResponse) {}
   rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse) {}
   rpc UpdateAccount(UpdateAccountRequest) returns(UpdateAccountResponse) {}
   rpc ConfirmBirthday(ConfirmBirthdayRequest) returns (ConfirmBirthdayResponse) {}
@@ -32,9 +33,11 @@ message Email {
 }
 
 message Requisite {
-  string accountNumber = 1;
-  string currency = 2;
-  float balance = 3;
+  string id = 1;
+  string accountNumber = 2;
+  string currency = 3;
+  float balance = 4;
+  Account account = 5;
 }
 
 message Account {
@@ -153,4 +156,17 @@ message ChangeStatusErrors {
 message ChangeStatusResponse {
   ChangeStatusErrors errors = 1;
   Account result = 2;
+}
+
+message GetRequisiteByAccountNumberRequest {
+  string accountNumber = 1;
+}
+
+message GetRequisiteByAccountNumberErrors {
+  string accountNumber = 1;
+}
+
+message GetRequisiteByAccountNumberResponse {
+  GetRequisiteByAccountNumberErrors errors = 1;
+  Requisite result = 2;
 }
