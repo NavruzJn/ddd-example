@@ -12,8 +12,8 @@
   "dependencies": {
     "@transaction/domain": "0.0.0",
     "@transaction/application": "0.0.0",
-    "@monstrs/nestjs-bus": "^0.1.15",
-    "@monstrs/nestjs-logger": "^0.2.16",
+    "@monstrs/nestjs-bus": "0.1.4",
+    "@monstrs/nestjs-logger": "0.1.2",
     "@nestjs/common": "^8.0.4",
     "@nestjs/typeorm": "^8.0.1",
     "@node-ts/ddd": "^0.1.6",

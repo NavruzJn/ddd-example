@@ -1,5 +1,5 @@
 import { Bus }                              from '@monstrs/nestjs-bus'
-import { NestLogger }                       from '@monstrs/nestjs-logger'
+import { Logger }                           from '@monstrs/nestjs-logger'
 import { WriteRepository }                  from '@node-ts/ddd'
 import { Connection }                       from 'typeorm'
 
@@ -11,10 +11,10 @@ import { Transaction }                      from '../entities'
 
 @Injectable()
 // @ts-ignore
-export class TransactionEntityRepository extends WriteRepository<TransactionEntity, Account> {
+export class TransactionEntityRepository extends WriteRepository<TransactionEntity, Transaction> {
   constructor(
     private readonly connection: Connection,
-    private readonly logger: NestLogger,
+    private readonly logger: Logger,
     private readonly bus: Bus,
   ) {
     // @ts-ignore

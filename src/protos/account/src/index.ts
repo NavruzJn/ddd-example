@@ -17,7 +17,7 @@ const protosPath = path.dirname(
   ),
 )
 
-export const PROTO_PATH = path.join(protosPath, '../transaction.proto')
+export const PROTO_PATH = path.join(protosPath, '../account.proto')
 
 export const clientOptions: ClientOptions = {
   transport: Transport.GRPC,

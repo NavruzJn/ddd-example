@@ -1,5 +1,5 @@
 import { Bus }                          from '@monstrs/nestjs-bus'
-import { NestLogger }                   from '@monstrs/nestjs-logger'
+import { Logger }                       from '@monstrs/nestjs-logger'
 import { WriteRepository }              from '@node-ts/ddd'
 import { Connection }                   from 'typeorm'
 
@@ -14,7 +14,7 @@ import { Requisite }                    from '../entities'
 export class RequisiteEntityRepository extends WriteRepository<RequisiteEntity, Requisite> {
   constructor(
     private readonly connection: Connection,
-    private readonly logger: NestLogger,
+    private readonly logger: Logger,
     private readonly bus: Bus,
   ) {
     // @ts-ignore

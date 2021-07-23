@@ -1,7 +1,7 @@
 import { NestFactory }   from '@nestjs/core'
 import { useContainer }  from 'class-validator'
 
-import { serverOptions } from '@protos/account'
+import { serverOptions } from '@protos/transaction'
 
 import { ServiceModule } from './module'
 
