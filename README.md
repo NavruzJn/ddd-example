@@ -37,3 +37,8 @@ Also, there can be added extra participants like bank, activity log, etc.
 1. handle errors in gateway received from services
 2. add tests
 3. add jsdoc comments
+
+### Tests
+
+1. ```docker-compose up -d db``` - up db container
+2. ```docker-compose run yarn test``` - run e2e tests

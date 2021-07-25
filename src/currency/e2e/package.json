@@ -1,0 +1,23 @@
+{
+  "name": "@currency/tests",
+  "version": "0.0.128",
+  "license": "MIT",
+  "devDependencies": {
+    "@nestjs/testing": "^8.0.4"
+  },
+  "peerDependencies": {
+    "@currency/application": "0.0.0",
+    "@monstrs/nestjs-bus": "0.1.4",
+    "@monstrs/nestjs-logger": "0.1.2",
+    "@nestjs/microservices": "^8.0.4",
+    "@nestjs/typeorm": "^8.0.1",
+    "@node-ts/bus-core": "^0.6.5",
+    "@node-ts/ddd": "^0.1.6",
+    "@node-ts/ddd-types": "^0.1.4",
+    "@protos/account": "0.0.0",
+    "@protos/interfaces": "0.0.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.34",
+    "uuid": "^8.3.2"
+  }
+}

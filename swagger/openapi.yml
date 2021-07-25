@@ -77,7 +77,10 @@ paths:
         "200":
           description: "Created Account"
           schema:
-            $ref: "#/definitions/Account"
+            type: "object"
+            properties:
+              result:
+                $ref: "#/definitions/Account"
     put:
       tags:
         - "account"
@@ -138,7 +141,10 @@ paths:
         "200":
           description: "Updated Account"
           schema:
-            $ref: "#/definitions/Account"
+            type: "object"
+            properties:
+              result:
+                $ref: "#/definitions/Account"
     get:
       tags:
         - "account"
@@ -153,9 +159,12 @@ paths:
         "200":
           description: "Updated Account"
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Account"
+            type: "object"
+            properties:
+              rows:
+                type: "array"
+                items:
+                  $ref: "#/definitions/Account"
   /accounts/{accountId}:
     get:
       tags:
@@ -175,7 +184,10 @@ paths:
         "200":
           description: "successful operation"
           schema:
-            $ref: "#/definitions/Account"
+            type: "object"
+            properties:
+              result:
+                $ref: "#/definitions/Account"
         "404":
           description: "Account not found"
   /currencies:
@@ -193,9 +205,12 @@ paths:
         "200":
           description: "Updated Currency"
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Currency"
+            type: "object"
+            properties:
+              rows:
+                type: "array"
+                items:
+                  $ref: "#/definitions/Currency"
   /currencies/rate:
     get:
       tags:
@@ -220,7 +235,12 @@ paths:
         "200":
           description: "successful operation"
           schema:
-            $ref: "#/definitions/CurrencyRate"
+            type: "object"
+            properties:
+              rows:
+                type: "array"
+                items:
+                  $ref: "#/definitions/CurrencyRate"
   /transaction:
     post:
       tags:
@@ -269,7 +289,11 @@ paths:
         "200":
           description: "Created Transaction"
           schema:
-            $ref: "#/definitions/Transaction"
+            type: "object"
+            properties:
+              result:
+                $ref: "#/definitions/Transaction"
+
     get:
       tags:
         - "transaction"
@@ -308,9 +332,12 @@ paths:
         "200":
           description: "Existing Transactions"
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Transaction"
+            type: "object"
+            properties:
+              rows:
+                type: "array"
+                items:
+                  $ref: "#/definitions/Transaction"
 definitions:
   Account:
     type: "object"

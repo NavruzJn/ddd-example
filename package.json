@@ -14,7 +14,7 @@
     "transaction-service:dev": "yarn workspace @transaction/service dev",
     "transaction-service:typeorm": "yarn workspace @transaction/persistence run typeorm",
     "currency-service:dev": "yarn workspace @currency/service dev",
-    "public-gateway:dev": "yarn workspace @public-gateway/app dev",
+    "public-gateway:dev": "yarn workspace @public-gateway/app dev"
   },
   "devDependencies": {
     "@atlantis-lab/actl": "^0.4.37",
