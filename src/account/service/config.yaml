@@ -1,0 +1,18 @@
+consul:
+  host: consul-server
+  port: 8500
+loadbalance:
+  rule: RandomRule
+  services:
+    - name: account
+      rule: RoundRobinRul
+service:
+  discoveryHost: account
+  healthCheck:
+    timeout: 1s
+    interval: 10s
+    tcp: ${{ service.discoveryHost }}:${{ service.port }}
+  maxRetry: 5
+  retryInterval: 5000
+  name: account
+  port: 50051

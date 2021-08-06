@@ -10,6 +10,12 @@
   },
   "dependencies": {
     "@logger/interceptor": "0.0.0",
+    "@nestcloud/boot": "^0.7.17",
+    "@nestcloud/common": "^0.7.17",
+    "@nestcloud/config": "^0.7.17",
+    "@nestcloud/consul": "^0.7.17",
+    "@nestcloud/logger": "^0.7.17",
+    "@nestcloud/service": "^0.7.17",
     "@nestjs/common": "^8.0.4",
     "@nestjs/config": "^1.0.1",
     "@nestjs/core": "^8.0.4",
@@ -17,7 +23,8 @@
     "@public-gateway/account": "0.0.0",
     "@public-gateway/currency": "0.0.0",
     "@public-gateway/transaction": "0.0.0",
-    "@sentry/node": "^6.0.3"
+    "@sentry/node": "^6.0.3",
+    "consul": "^0.40.0"
   },
   "devDependencies": {
     "@monstrs/server-scripts": "0.1.5",

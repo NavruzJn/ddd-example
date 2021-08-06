@@ -1,22 +1,35 @@
-import { ConfigService }  from '@nestjs/config'
+import { BOOT, IBoot }    from '@nestcloud/common'
+import { NestLogger }     from '@nestcloud/logger'
 import { NestFactory }    from '@nestjs/core'
+import { resolve }        from 'path'
 
 import { ValidationPipe } from '@nestjs/common'
 
 import { AppModule }      from './module'
 
 // @ts-ignore
+
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule)
+  const app = await NestFactory.create(AppModule, {
+    logger: new NestLogger({ filePath: resolve(__dirname, '../config.yaml') }),
+  })
 
-  // enable shutdown hooks explicitly.
-  app.enableShutdownHooks()
+  process.on('SIGINT', async () => {
+    setTimeout(() => process.exit(1), 5000)
+    await app.close()
+    process.exit(0)
+  })
 
+  // kill -15
+  process.on('SIGTERM', async () => {
+    setTimeout(() => process.exit(1), 5000)
+    await app.close()
+    process.exit(0)
+  })
+
+  const boot: IBoot = app.get(BOOT)
   app.useGlobalPipes(new ValidationPipe())
-  app.enableCors()
-  // app.useLogger();
-  const configService = app.get<ConfigService>(ConfigService)
-  await app.listen(configService.get<number>('app.port') || 3000)
+  await app.listen(boot.get('service.port', 3000))
 }
 
 bootstrap()

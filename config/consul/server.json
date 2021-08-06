@@ -1,0 +1,22 @@
+{
+  "node_name": "consul-server",
+  "server": true,
+  "bootstrap" : true,
+  "ui_config": {
+    "enabled" : true
+  },
+  "data_dir": "/consul/data",
+  "addresses": {
+    "http" : "0.0.0.0"
+  },
+  "dns_config": {
+    "allow_stale": false,
+    "soa": {
+      "min_ttl": 0
+    },
+    "service_ttl": {
+      "*": "0s"
+    },
+    "node_ttl": "0s"
+  }
+}

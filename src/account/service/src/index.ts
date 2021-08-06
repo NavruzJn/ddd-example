@@ -1,5 +1,6 @@
 import { NestFactory }   from '@nestjs/core'
 import { useContainer }  from 'class-validator'
+import { BOOT, IBoot } from '@nestcloud/common';
 
 import { serverOptions } from '@protos/account'
 
@@ -9,6 +10,8 @@ declare const module: any
 
 const bootstrap = async () => {
   const app = await NestFactory.createMicroservice(ServiceModule, serverOptions)
+
+  const boot = app.get<IBoot>(BOOT);
 
   useContainer(app.select(ServiceModule), {
     fallback: true,
